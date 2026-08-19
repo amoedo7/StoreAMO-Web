@@ -1,0 +1,29 @@
+name: web-ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Check JavaScript syntax
+        run: node --check app.js
+      - name: Parse HTML
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          HTMLParser().feed(Path('index.html').read_text(encoding='utf-8'))
+          print('HTML OK')
+          PY
+      - name: Ensure no inline executable script
+        run: python -c "from pathlib import Path; s=Path('index.html').read_text(); assert '<script>' not in s"
