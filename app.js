@@ -1,0 +1,62 @@
+const CATALOG_URL='https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/catalog.json';
+const PLATFORM_LABELS={android:'Android',windows:'Windows',macos:'macOS',linux:'Linux',web:'Web',ios:'iPhone / iPad',other:'Otro'};
+const ICONS={storeamo:'S',chessi:'♟',midispositivo:'D',mired:'R',misistema:'M',miweb:'W',miarchivos:'A',miapi:'API',diagnosticoamo:'✓'};
+const FALLBACK={schema:'storeamo.catalog.v1',catalog_version:0,apps:[]};
+const state={catalog:FALLBACK,platform:'other',platformAuto:'other',query:'',category:'Todas',verifiedOnly:true,channel:'stable'};
+
+function detectPlatform(){
+  const ua=(navigator.userAgent||'').toLowerCase();
+  const p=(navigator.userAgentData?.platform||navigator.platform||'').toLowerCase();
+  if(/android/.test(ua))return'android';
+  if(/iphone|ipad|ipod/.test(ua)||(p==='macintel'&&navigator.maxTouchPoints>1))return'ios';
+  if(/win/.test(p)||/windows/.test(ua))return'windows';
+  if(/mac/.test(p)||/macintosh/.test(ua))return'macos';
+  if(/linux/.test(p)||/linux/.test(ua))return'linux';
+  return'other';
+}
+function effectivePlatform(){return localStorage.getItem('storeamo.platform')||state.platformAuto}
+function labelPlatform(p){return PLATFORM_LABELS[p]||p}
+function initials(app){return ICONS[app.id]||app.name.slice(0,2).toUpperCase()}
+function matchingArtifact(app,p=state.platform){return(app.artifacts||[]).find(a=>a.platform===p&&(!state.verifiedOnly||a.verified))}
+function supported(app,p=state.platform){return(app.supported_platforms||[]).includes(p)||(app.artifacts||[]).some(a=>a.platform===p)}
+function platformSummary(app){return(app.supported_platforms||[]).map(labelPlatform).join(' · ')||'Plataforma por confirmar'}
+function statusLabel(app){if(app.status==='verified')return'Verificada';if(app.status==='candidate')return'Candidata';if(app.status==='deprecated')return'Retirada';return'En desarrollo'}
+function primaryLabel(app){const a=matchingArtifact(app);if(a)return`Obtener para ${labelPlatform(a.platform)}`;if(supported(app))return'Próximamente';return'Ver más'}
+function appActionDisabled(app){return!matchingArtifact(app)}
+function iconHTML(app){return`<div class="app-icon">${initials(app)}</div>`}
+function platformPills(app){const all=app.supported_platforms||[];return`<div class="platforms">${all.map(p=>`<span class="platform-pill ${p===state.platform?'current':''}">${labelPlatform(p)}</span>`).join('')}</div>`}
+function appRow(app){return`<article class="app-row" data-app="${app.id}">${iconHTML(app)}<div class="app-info"><h3>${app.name}</h3><p>${app.tagline}</p><div class="app-meta"><span>${app.category}</span><span>·</span><span>${supported(app)?labelPlatform(state.platform):platformSummary(app)}</span><span>·</span><span>${statusLabel(app)}</span></div></div><button class="primary" data-download="${app.id}" ${appActionDisabled(app)?'disabled':''}>${primaryLabel(app)}</button></article>`}
+function appTile(app){return`<article class="app-tile" data-app="${app.id}">${iconHTML(app)}<h3>${app.name}</h3><p>${app.tagline}</p>${platformPills(app)}</article>`}
+function filteredApps(){let apps=[...state.catalog.apps];if(state.query){const q=state.query.toLowerCase();apps=apps.filter(a=>`${a.name} ${a.tagline} ${a.description} ${a.category}`.toLowerCase().includes(q))}if(state.category!=='Todas')apps=apps.filter(a=>a.category===state.category);return apps.sort((a,b)=>Number(supported(b))-Number(supported(a))||Number(b.featured)-Number(a.featured)||a.name.localeCompare(b.name))}
+
+function renderHome(){
+  const apps=filteredApps();const featured=apps.find(a=>a.featured&&supported(a))||apps.find(a=>a.featured)||apps[0];
+  document.getElementById('deviceLine').textContent=`Detectamos ${labelPlatform(state.platform)}. StoreAMO prioriza lo compatible y deja el resto detrás de “Ver más”.`;
+  document.getElementById('featuredSection').innerHTML=featured?`<section class="featured" data-app="${featured.id}"><div class="featured-copy"><span class="kicker">DESTACADA · ${statusLabel(featured).toUpperCase()}</span><h2>${featured.name}</h2><p>${featured.tagline}</p><div class="feature-meta"><span class="pill">${supported(featured)?labelPlatform(state.platform):platformSummary(featured)}</span>${featured.status==='verified'?'<span class="verified-pill">✓ StoreAMO Verified</span>':'<span class="pill">Verificación pendiente</span>'}</div><button class="primary" data-download="${featured.id}" ${appActionDisabled(featured)?'disabled':''}>${primaryLabel(featured)}</button></div><div class="featured-art"><div class="orb"><span>${initials(featured)}</span></div></div></section>`:'';
+  const current=apps.filter(a=>supported(a)).slice(0,5);const rest=apps.filter(a=>!supported(a)).slice(0,5);
+  document.getElementById('deviceApps').innerHTML=current.length?current.map(appRow).join(''):'<div class="empty-card">Todavía no hay aplicaciones publicadas para esta plataforma.</div>';
+  document.getElementById('moreApps').innerHTML=rest.length?rest.map(appRow).join(''):'<div class="empty-card">Todo el catálogo actual es compatible con tu plataforma.</div>';
+}
+function renderApps(){
+  const cats=['Todas',...new Set(state.catalog.apps.map(a=>a.category))];
+  document.getElementById('categoryChips').innerHTML=cats.map(c=>`<button class="chip ${state.category===c?'active':''}" data-category="${c}">${c}</button>`).join('');
+  document.getElementById('allApps').innerHTML=filteredApps().map(appTile).join('')||'<div class="empty-card">No encontramos coincidencias.</div>';
+}
+function renderUpdates(){
+  const verified=state.catalog.apps.flatMap(app=>(app.artifacts||[]).filter(a=>a.verified).map(a=>({app,a})));
+  document.getElementById('updatesList').innerHTML=verified.length?`<h3>${verified.length} releases verificadas en catálogo</h3><p>La app Android comparará versionCode/versionName con lo instalado para decidir cuáles son actualizaciones.</p>`:'<div class="empty-icon">↻</div><h3>Sin releases oficiales todavía</h3><p>No publicamos APK antiguos sólo para llenar la tienda. La primera versión aparecerá cuando pase la verificación definida.</p>';
+}
+function renderSettings(){document.getElementById('settingsDevice').textContent=`Actual: ${labelPlatform(state.platform)}${localStorage.getItem('storeamo.platform')?' · selección manual':' · detección automática'}`;document.getElementById('platformButton').textContent=localStorage.getItem('storeamo.platform')?labelPlatform(state.platform):`Auto · ${labelPlatform(state.platform)}`;document.getElementById('verifiedOnly').checked=state.verifiedOnly;document.getElementById('channelSelect').value=state.channel;document.getElementById('themeSelect').value=localStorage.getItem('storeamo.theme')||'dark'}
+function render(){renderHome();renderApps();renderUpdates();renderSettings();wireDynamic()}
+function wireDynamic(){document.querySelectorAll('[data-app]').forEach(el=>el.onclick=e=>{if(e.target.closest('[data-download]'))return;openApp(el.dataset.app)});document.querySelectorAll('[data-download]').forEach(el=>el.onclick=e=>{e.stopPropagation();downloadApp(el.dataset.download)});document.querySelectorAll('[data-category]').forEach(el=>el.onclick=()=>{state.category=el.dataset.category;renderApps();wireDynamic()})}
+function openApp(id){const app=state.catalog.apps.find(a=>a.id===id);if(!app)return;const current=matchingArtifact(app);const supportedList=app.supported_platforms||[];const dialog=document.getElementById('appDialog');document.getElementById('dialogContent').innerHTML=`<div class="dialog-inner"><div class="dialog-top"><div class="dialog-title">${iconHTML(app)}<div><span class="kicker">${app.category.toUpperCase()}</span><h2>${app.name}</h2><span class="${app.status==='verified'?'verified-pill':'pill'}">${app.status==='verified'?'✓ StoreAMO Verified':statusLabel(app)}</span></div></div><button class="close" data-close>×</button></div><p class="dialog-body">${app.description}</p><h3>Para este dispositivo</h3>${current?artifactHTML(current,true):`<div class="empty-card">${supported(app)?`${labelPlatform(state.platform)} está previsto, pero todavía no hay una release oficial verificada.`:`Esta app no tiene versión para ${labelPlatform(state.platform)}.`}</div>`}<div class="dialog-actions"><button class="secondary" id="morePlatforms">Ver más dispositivos</button>${app.repository?`<a class="secondary" href="${app.repository}" target="_blank" rel="noreferrer">Código</a>`:''}</div><div id="otherPlatforms" hidden><h3>Otros dispositivos</h3>${supportedList.map(p=>{const a=(app.artifacts||[]).find(x=>x.platform===p);return a?artifactHTML(a,false):`<div class="artifact"><div><b>${labelPlatform(p)}</b><br><small>Sin release oficial todavía</small></div><span class="pill">Próximamente</span></div>`}).join('')}</div></div>`;dialog.showModal();dialog.querySelector('[data-close]').onclick=()=>dialog.close();dialog.querySelector('#morePlatforms').onclick=()=>{dialog.querySelector('#otherPlatforms').hidden=!dialog.querySelector('#otherPlatforms').hidden};dialog.querySelectorAll('[data-url]').forEach(b=>b.onclick=()=>safeDownload(b.dataset.url,b.dataset.verified==='true'))}
+function artifactHTML(a,current){return`<div class="artifact"><div><b>${labelPlatform(a.platform)} ${current?'· recomendado':''}</b><br><small>${a.version||''} ${a.format?`· ${a.format}`:''}${a.verified?' · verificado':' · no verificado'}</small></div><button class="download-btn" data-url="${a.url}" data-verified="${!!a.verified}" ${state.verifiedOnly&&!a.verified?'disabled':''}>Obtener</button></div>`}
+function downloadApp(id){const app=state.catalog.apps.find(a=>a.id===id);const artifact=matchingArtifact(app);if(artifact)safeDownload(artifact.url,artifact.verified);else openApp(id)}
+function safeDownload(url,verified){if(!url||!url.startsWith('https://'))return;if(state.verifiedOnly&&!verified)return;location.href=url}
+function route(name){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.dataset.view===name));document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.route===name));window.scrollTo({top:0,behavior:'smooth'});if(name==='settings')renderSettings()}
+function openPlatformDialog(){const d=document.getElementById('platformDialog');const opts=['auto','android','windows','macos','linux','ios','web'];const saved=localStorage.getItem('storeamo.platform');document.getElementById('platformOptions').innerHTML=opts.map(p=>`<button class="platform-option ${(p==='auto'&&!saved)||p===saved?'current':''}" type="button" data-platform="${p}">${p==='auto'?`Automático · ${labelPlatform(state.platformAuto)}`:labelPlatform(p)}</button>`).join('');d.showModal();d.querySelectorAll('[data-platform]').forEach(b=>b.onclick=()=>{if(b.dataset.platform==='auto')localStorage.removeItem('storeamo.platform');else localStorage.setItem('storeamo.platform',b.dataset.platform);state.platform=effectivePlatform();d.close();render()})}
+function applyTheme(mode){document.body.classList.remove('light');if(mode==='light'||(mode==='system'&&matchMedia('(prefers-color-scheme: light)').matches))document.body.classList.add('light');localStorage.setItem('storeamo.theme',mode)}
+async function load(){state.platformAuto=detectPlatform();state.platform=effectivePlatform();state.verifiedOnly=localStorage.getItem('storeamo.verifiedOnly')!=='false';state.channel=localStorage.getItem('storeamo.channel')||'stable';applyTheme(localStorage.getItem('storeamo.theme')||'dark');try{const r=await fetch(CATALOG_URL,{cache:'no-store'});if(!r.ok)throw new Error('catalog');const c=await r.json();if(c.schema!=='storeamo.catalog.v1'||!Array.isArray(c.apps))throw new Error('schema');state.catalog=c}catch(e){state.catalog=FALLBACK}render()}
+
+document.addEventListener('click',e=>{const r=e.target.closest('[data-route]');if(r)route(r.dataset.route)});document.getElementById('searchToggle').onclick=()=>{route('home');document.getElementById('searchInput').focus()};document.getElementById('searchInput').oninput=e=>{state.query=e.target.value.trim();render()};document.getElementById('platformButton').onclick=openPlatformDialog;document.getElementById('verifiedOnly').onchange=e=>{state.verifiedOnly=e.target.checked;localStorage.setItem('storeamo.verifiedOnly',String(state.verifiedOnly));render()};document.getElementById('channelSelect').onchange=e=>{state.channel=e.target.value;localStorage.setItem('storeamo.channel',state.channel)};document.getElementById('themeSelect').onchange=e=>applyTheme(e.target.value);
+load();
