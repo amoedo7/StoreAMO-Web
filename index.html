@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#06101C" />
+  <meta name="description" content="StoreAMO · aplicaciones verificadas del ecosistema DesarrollAMO" />
+  <title>StoreAMO · DesarrollAMO</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" data-route="home" aria-label="Ir al inicio"><span class="brand-mark">AMO</span><span>Store<span class="amo">AMO</span></span></button>
+      <div class="top-actions">
+        <button class="icon-button" id="searchToggle" aria-label="Buscar">⌕</button>
+        <button class="avatar" data-route="settings" aria-label="Ajustes">A</button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="view active" data-view="home">
+        <div class="hero">
+          <div class="eyebrow">DESARROLLAMO · CATÁLOGO OFICIAL</div>
+          <h1>Apps hechas para<br><span>tu dispositivo.</span></h1>
+          <p id="deviceLine" class="device-line">Detectando dispositivo…</p>
+          <div class="search-wrap" id="searchWrap">
+            <span>⌕</span><input id="searchInput" type="search" placeholder="Buscar apps" autocomplete="off" />
+          </div>
+        </div>
+        <div id="featuredSection"></div>
+        <section class="section-block">
+          <div class="section-title"><div><span class="kicker">PARA ESTE DISPOSITIVO</span><h2>Recomendadas para vos</h2></div><button class="text-button" data-route="apps">Ver todas</button></div>
+          <div id="deviceApps" class="app-list"></div>
+        </section>
+        <section class="section-block">
+          <div class="section-title"><div><span class="kicker">ECOSISTEMA</span><h2>Más de DesarrollAMO</h2></div></div>
+          <div id="moreApps" class="app-list"></div>
+        </section>
+      </section>
+
+      <section class="view" data-view="apps">
+        <div class="page-head"><span class="kicker">CATÁLOGO</span><h1>Aplicaciones</h1><p>Mostramos primero lo compatible con el dispositivo detectado.</p></div>
+        <div class="chips" id="categoryChips"></div>
+        <div id="allApps" class="grid-list"></div>
+      </section>
+
+      <section class="view" data-view="updates">
+        <div class="page-head"><span class="kicker">VERSIONES</span><h1>Actualizaciones</h1><p>Cuando existan releases verificadas, StoreAMO comparará la versión instalada con el catálogo.</p></div>
+        <div id="updatesList" class="empty-card"></div>
+      </section>
+
+      <section class="view" data-view="library">
+        <div class="page-head"><span class="kicker">TU ESPACIO</span><h1>Biblioteca</h1><p>Descargas, instaladas y elementos guardados aparecerán acá cuando la app Android gestione el inventario local.</p></div>
+        <div class="empty-card"><div class="empty-icon">◫</div><h3>Tu biblioteca empieza con StoreAMO</h3><p>La versión web no inspecciona apps instaladas ni almacenamiento local sin que vos lo elijas.</p></div>
+      </section>
+
+      <section class="view" data-view="settings">
+        <div class="profile-head">
+          <div class="avatar big">A</div><div><span class="kicker">STOREAMO</span><h1>Configuración</h1><p id="settingsDevice">Dispositivo detectado</p></div>
+        </div>
+        <div class="settings-stack">
+          <article class="settings-card"><div><b>Dispositivo</b><span>Prioriza descargas compatibles.</span></div><button class="setting-value" id="platformButton">Auto</button></article>
+          <article class="settings-card"><div><b>Solo versiones verificadas</b><span>Oculta descargas sin evidencia suficiente.</span></div><label class="switch"><input id="verifiedOnly" type="checkbox" checked><span></span></label></article>
+          <article class="settings-card"><div><b>Canal de versiones</b><span>Estable por defecto. Beta queda separado.</span></div><select id="channelSelect"><option value="stable">Estable</option><option value="beta">Beta</option></select></article>
+          <article class="settings-card"><div><b>Apariencia</b><span>Branding DesarrollAMO con modo oscuro como base.</span></div><select id="themeSelect"><option value="dark">Oscuro</option><option value="system">Sistema</option><option value="light">Claro</option></select></article>
+          <article class="settings-card"><div><b>Privacidad</b><span>Sin telemetría por defecto. La detección de plataforma ocurre localmente.</span></div><span class="verified-pill">Local</span></article>
+          <article class="settings-card"><div><b>Verificación StoreAMO</b><span>SHA-256, firma, versión, permisos y evidencia por release.</span></div><a href="https://github.com/amoedo7/StoreAMO-Verify" target="_blank" rel="noreferrer">Ver sistema</a></article>
+          <article class="settings-card"><div><b>Catálogo</b><span>Fuente pública y versionada del ecosistema.</span></div><a href="https://github.com/amoedo7/StoreAMO-Catalog" target="_blank" rel="noreferrer">Abrir</a></article>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Navegación principal">
+      <button class="nav-item active" data-route="home"><span>◆</span><b>Inicio</b></button>
+      <button class="nav-item" data-route="apps"><span>▦</span><b>Apps</b></button>
+      <button class="nav-item" data-route="updates"><span>↻</span><b>Actualizaciones</b></button>
+      <button class="nav-item" data-route="library"><span>▣</span><b>Biblioteca</b></button>
+      <button class="nav-item" data-route="settings"><span>●</span><b>Ajustes</b></button>
+    </nav>
+  </div>
+
+  <dialog id="appDialog" class="app-dialog"><div id="dialogContent"></div></dialog>
+  <dialog id="platformDialog" class="platform-dialog">
+    <form method="dialog">
+      <h2>Elegir dispositivo</h2><p>Automático usa solamente datos locales del navegador.</p>
+      <div class="platform-options" id="platformOptions"></div>
+      <button class="secondary full" value="cancel">Cancelar</button>
+    </form>
+  </dialog>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
