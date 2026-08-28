@@ -1,0 +1,61 @@
+{
+  "schema": "desarrollamo.amo.v1",
+  "amo_version": "1.0.0",
+  "id": "storeamo-web",
+  "name": "StoreAMO-Web",
+  "kind": "distribution-web-surface",
+  "origin": "native",
+  "membership": "candidate",
+  "trust": "inspected",
+  "unit": {
+    "purpose": "Exponer el catálogo público de StoreAMO en una interfaz web estática y orientar al usuario hacia artefactos compatibles con su plataforma.",
+    "responsibility": "Renderizar catálogo y enlaces de descarga públicos sin firmar, publicar, modificar ni declarar verificados los artefactos.",
+    "owner": "human_responsible",
+    "capabilities": ["catalog-browsing", "platform-detection", "verified-filtering", "public-download-links", "last-known-good-cache"]
+  },
+  "model": {
+    "inherits": [],
+    "context": ["README.md", "index.html", "app.js", "catalog-cache.js", "netlify.toml", ".github/workflows/web-ci.yml"],
+    "rules": [
+      "StoreAMO-Catalog es la fuente de datos del catálogo; esta superficie no concede por sí misma estado verified a una release.",
+      "La detección de plataforma es local y debe seguir siendo anulable por el usuario.",
+      "La interfaz web no debe requerir secretos ni tokens de GitHub para leer releases públicas.",
+      "Esta unidad no firma, publica ni instala artefactos y no reemplaza los gates de StoreAMO, StoreAMO-Catalog o StoreAMO-Verify.",
+      "Un check no ejecutado o una fuente no alcanzable no puede presentarse como PASS."
+    ]
+  },
+  "map": {
+    "parent": "raizamo",
+    "children": [],
+    "relations": [
+      {"type": "reads", "target": "storeamo-catalog", "strength": "high"},
+      {"type": "supports", "target": "storeamo", "strength": "medium"}
+    ],
+    "covers": ["index.html", "app.js", "catalog-cache.js", "styles.css", "netlify.toml", "scripts/**"]
+  },
+  "policy": {
+    "cross_domain_changes_require_external_gates": true,
+    "self_declared_pass_allowed": false
+  },
+  "provenance": {
+    "source_uri": "https://github.com/amoedo7/StoreAMO-Web",
+    "source_type": "git-repository",
+    "source_ref": "main"
+  },
+  "health": {
+    "checks": [
+      {
+        "id": "storeamo-web-autocheck",
+        "type": "command",
+        "command": "bash scripts/autocheck.sh",
+        "cwd": ".",
+        "timeout_seconds": 180,
+        "description": "Valida el contrato y las comprobaciones estáticas deterministas de StoreAMO-Web."
+      }
+    ]
+  },
+  "evidence": {
+    "status": "inspected",
+    "refs": ["README.md", "index.html", "app.js", "catalog-cache.js", "netlify.toml", ".github/workflows/web-ci.yml", "scripts/autocheck.sh"]
+  }
+}
