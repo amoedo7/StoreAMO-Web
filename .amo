@@ -15,7 +15,7 @@
   },
   "model": {
     "inherits": [],
-    "context": ["README.md", "index.html", "app.js", "catalog-cache.js", "netlify.toml", ".github/workflows/web-ci.yml"],
+    "context": ["README.md", "RECOVERY.md", "index.html", "app.js", "catalog-cache.js", "netlify.toml", ".github/workflows/web-ci.yml"],
     "rules": [
       "StoreAMO-Catalog es la fuente de datos del catálogo; esta superficie no concede por sí misma estado verified a una release.",
       "La detección de plataforma es local y debe seguir siendo anulable por el usuario.",
@@ -56,6 +56,6 @@
   },
   "evidence": {
     "status": "inspected",
-    "refs": ["README.md", "index.html", "app.js", "catalog-cache.js", "netlify.toml", ".github/workflows/web-ci.yml", "scripts/autocheck.sh"]
+    "refs": ["README.md", "RECOVERY.md", "index.html", "app.js", "catalog-cache.js", "netlify.toml", ".github/workflows/web-ci.yml", "scripts/autocheck.sh"]
   }
 }
