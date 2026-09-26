@@ -1,4 +1,4 @@
-const CATALOG_URL='https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/catalog.json';
+const CATALOG_URL='/catalog-public.json';
 const PLATFORM_LABELS={android:'Android',windows:'Windows',macos:'macOS',linux:'Linux',web:'Web',ios:'iPhone / iPad',other:'Otro'};
 const ICONS={storeamo:'S',chessi:'♟',midispositivo:'D',mired:'R',misistema:'M',miweb:'W',miarchivos:'A',miapi:'API',diagnosticoamo:'✓'};
 const FALLBACK={schema:'storeamo.catalog.v1',catalog_version:0,apps:[]};
@@ -14,6 +14,7 @@ function publicWebCatalog(catalog){
 }
 
 const state={catalog:FALLBACK,platform:'other',platformAuto:'other',query:'',category:'Todas',verifiedOnly:true,channel:'stable'};
+try{localStorage.removeItem('storeamo.catalog.lastKnownGood.v1')}catch{}
 function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
 function safeHttps(url){try{return new URL(url,location.href).protocol==='https:'}catch{return false}}
 
