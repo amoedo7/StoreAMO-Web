@@ -1,0 +1,619 @@
+{
+  "schema": "storeamo.catalog.v1",
+  "catalog_version": 3,
+  "generated_at": "2026-09-26T01:31:18+00:00",
+  "publication": "storeamo-web-public-selection",
+  "apps": [
+    {
+      "id": "generalamo",
+      "name": "GeneralAMO",
+      "tagline": "Generala para jugar, anotar y compartir en la misma red.",
+      "description": "Juego y marcador local-first de Generala con dados físicos o digitales. Guarda partidas e historial, muestra turnos y actividad detallada, aplica servido y tachadas, y permite jugar o anotar desde varios dispositivos en la misma Wi-Fi/hotspot mediante enlaces separados de lectura y juego. La interfaz se adapta a teléfono, tablet y escritorio.",
+      "category": "Juegos",
+      "audience": "public",
+      "featured": true,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.16",
+          "url": "https://github.com/amoedo7/GeneralAMO/releases/download/v0.1.16/GeneralAMO-0.1.16.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/GeneralAMO"
+    },
+    {
+      "id": "qramomini",
+      "name": "QRAMOMini",
+      "tagline": "Texto adentro, QR afuera. Todo local.",
+      "description": "Generador Android sencillo de códigos QR desde texto, enlaces y otros contenidos. Funciona localmente, sin cuenta y sin permisos especiales.",
+      "category": "Herramientas",
+      "audience": "public",
+      "featured": true,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://github.com/amoedo7/StoreAMO-Catalog/releases/download/qramomini-v0.1.0/QRAMOMini-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "calculamo",
+      "name": "CalculAMO",
+      "tagline": "Calculadora rápida con historial local.",
+      "description": "Calculadora Android offline con operaciones básicas, paréntesis e historial persistente.",
+      "category": "Herramientas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/calculamo/0.1.0/CalculAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "climaamo",
+      "name": "ClimaAMO",
+      "tagline": "Clima real aquí o en cualquier ciudad, hora por hora y a 5 días.",
+      "description": "ClimaAMO 0.2.1 agrega ubicación Aquí por GPS/red bajo permiso explícito, detalle interactivo de cada uno de los 5 días y sus horas, comparación separada Open-Meteo/MET Norway y calidad del aire real con AQI, PM2.5, PM10 y ozono. No promedia fuentes ni simula valores: cada dato proviene de una respuesta real o se muestra N/D.",
+      "category": "Clima",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.2.1",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/climaamo/0.2.1/ClimaAMO-0.2.1.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/ClimaAMO"
+    },
+    {
+      "id": "coloramo",
+      "name": "ColorAMO",
+      "tagline": "Convertí colores HEX y RGB",
+      "description": "Convertí colores HEX y RGB. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Diseño",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/coloramo/0.1.0/ColorAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "combustamo",
+      "name": "CombustAMO",
+      "tagline": "Calculá costo y consumo de combustible",
+      "description": "Calculá costo y consumo de combustible. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Viajes",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/combustamo/0.1.0/CombustAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "contamo",
+      "name": "ContAMO",
+      "tagline": "Contadores múltiples que quedan guardados.",
+      "description": "App Android offline para crear contadores independientes, sumar, restar, reiniciar y persistir valores.",
+      "category": "Herramientas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/contamo/0.1.0/ContAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "conversamo",
+      "name": "ConversAMO",
+      "tagline": "Unidades útiles en un solo lugar.",
+      "description": "Conversor offline de longitud, peso, temperatura y volumen.",
+      "category": "Herramientas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/conversamo/0.1.0/ConversAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "cronamo",
+      "name": "CronAMO",
+      "tagline": "Cronómetro simple con vueltas.",
+      "description": "Cronómetro Android offline con iniciar, pausar, reiniciar y registrar vueltas.",
+      "category": "Herramientas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/cronamo/0.1.0/CronAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "diasamo",
+      "name": "DiasAMO",
+      "tagline": "Días entre dos fechas",
+      "description": "Días entre dos fechas. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Utilidades",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/diasamo/0.1.0/DiasAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "dividamo",
+      "name": "DividAMO",
+      "tagline": "Dividí una cuenta entre varias personas",
+      "description": "Dividí una cuenta entre varias personas. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Finanzas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/dividamo/0.1.0/DividAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "edadamo",
+      "name": "EdadAMO",
+      "tagline": "Calculá edad exacta desde una fecha de nacimiento",
+      "description": "Calculá edad exacta desde una fecha de nacimiento. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Utilidades",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/edadamo/0.1.0/EdadAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "gastamo",
+      "name": "GastAMO",
+      "tagline": "Anotá un gasto en segundos.",
+      "description": "Registro local y rápido de ingresos y gastos con últimos movimientos visibles al registrar, Dashboard financiero con gráficos y Grupos para separar contextos como Personal, Familia, Amigos o Trabajo. Las categorías, movimientos, grupos y participantes se guardan en el teléfono.",
+      "category": "Finanzas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.3.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/gastamo/0.3.0/GastAMO-0.3.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "habitamo",
+      "name": "HabitAMO",
+      "tagline": "Un toque al día. Sin cuentas ni nube.",
+      "description": "Seguimiento Android minimalista de hábitos diarios y rachas. Todo funciona offline y los datos permanecen en el dispositivo.",
+      "category": "Productividad",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/artifacts/habitamo/HabitAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "intervalamo",
+      "name": "IntervalAMO",
+      "tagline": "Temporizador de intervalos trabajo/descanso",
+      "description": "Temporizador de intervalos trabajo/descanso. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Productividad",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/intervalamo/0.1.0/IntervalAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "nivelamo",
+      "name": "NivelAMO",
+      "tagline": "Nivel de burbuja usando los sensores del teléfono.",
+      "description": "Mide inclinación en tiempo real, calibra la referencia y funciona sin conexión.",
+      "category": "Herramientas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/nivelamo/0.1.0/NivelAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "notasamo",
+      "name": "NotasAMO",
+      "tagline": "Notas locales con búsqueda y favoritos.",
+      "description": "Bloc de notas Android offline con creación, edición, eliminación, búsqueda y favoritos persistidos en el dispositivo.",
+      "category": "Productividad",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://github.com/amoedo7/StoreAMO-Catalog/releases/download/notasamo-v0.1.0/NotasAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "pomodoramo",
+      "name": "PomodorAMO",
+      "tagline": "Temporizador Pomodoro local",
+      "description": "Temporizador Pomodoro local. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Productividad",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/pomodoramo/0.1.0/PomodorAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "propinamo",
+      "name": "PropinAMO",
+      "tagline": "Calculá propina y total por persona",
+      "description": "Calculá propina y total por persona. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Finanzas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/propinamo/0.1.0/PropinAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "relojamo",
+      "name": "RelojAMO",
+      "tagline": "Reloj digital y analógico, siempre disponible.",
+      "description": "Reloj offline para Android con hora digital, esfera analógica, fecha local y zona horaria del dispositivo.",
+      "category": "Utilidades",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://github.com/amoedo7/StoreAMO-Catalog/releases/download/relojamo-v0.1.0/RelojAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "respiramo",
+      "name": "RespirAMO",
+      "tagline": "Guía de respiración 4-4-4-4",
+      "description": "Guía de respiración 4-4-4-4. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Bienestar",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/respiramo/0.1.0/RespirAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "sorteamo",
+      "name": "SorteAMO",
+      "tagline": "Sorteos rápidos, locales y simples.",
+      "description": "Elige al azar nombres, opciones o números sin enviar datos a ningún servidor.",
+      "category": "Herramientas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/sorteamo/0.1.0/SorteAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "tareasamo",
+      "name": "TareasAMO",
+      "tagline": "Pendientes claros, sin cuentas.",
+      "description": "Lista local de tareas con estados pendientes y completadas, filtros y persistencia offline.",
+      "category": "Productividad",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/tareasamo/0.1.0/TareasAMO-0.1.0.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "temporizamo",
+      "name": "TemporizAMO",
+      "tagline": "Cuenta regresiva clara y offline.",
+      "description": "Temporizador Android con atajos 1/5/10/25 min, selector personalizado, progreso visible, estados claros, pausa, reanudación, reinicio y aviso al finalizar.",
+      "category": "Herramientas",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.1",
+          "url": "https://github.com/amoedo7/StoreAMO-Catalog/releases/download/temporizamo-v0.1.1/TemporizAMO-0.1.1.apk",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "viajeamo",
+      "name": "ViajeAMO",
+      "tagline": "Estimá duración de un viaje por distancia y velocidad",
+      "description": "Estimá duración de un viaje por distancia y velocidad. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Viajes",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/viajeamo/0.1.0/ViajeAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    },
+    {
+      "id": "zonaamo",
+      "name": "ZonaAMO",
+      "tagline": "Compará horarios por desplazamiento UTC",
+      "description": "Compará horarios por desplazamiento UTC. Aplicación Android local-first, sin cuenta, sin telemetría y sin permisos de Android.",
+      "category": "Utilidades",
+      "audience": "public",
+      "featured": false,
+      "status": "candidate",
+      "supported_platforms": [
+        "android"
+      ],
+      "artifacts": [
+        {
+          "platform": "android",
+          "arch": "universal",
+          "format": "apk",
+          "version": "0.1.0",
+          "url": "https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/main/public-artifacts/zonaamo/0.1.0/ZonaAMO-0.1.0.apk",
+          "verified": false
+        }
+      ],
+      "repository": "https://github.com/amoedo7/StoreAMO-Catalog/tree/main/factoryamo-builds/FAMO-20260822-201753-13807/Batch40"
+    }
+  ]
+}
