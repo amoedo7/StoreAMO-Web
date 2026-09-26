@@ -2,6 +2,17 @@ const CATALOG_URL='https://raw.githubusercontent.com/amoedo7/StoreAMO-Catalog/ma
 const PLATFORM_LABELS={android:'Android',windows:'Windows',macos:'macOS',linux:'Linux',web:'Web',ios:'iPhone / iPad',other:'Otro'};
 const ICONS={storeamo:'S',chessi:'♟',midispositivo:'D',mired:'R',misistema:'M',miweb:'W',miarchivos:'A',miapi:'API',diagnosticoamo:'✓'};
 const FALLBACK={schema:'storeamo.catalog.v1',catalog_version:0,apps:[]};
+const PUBLIC_WEB_APP_IDS=new Set([
+  'generalamo','qramomini','calculamo','climaamo','coloramo','combustamo',
+  'contamo','conversamo','cronamo','diasamo','dividamo','edadamo',
+  'gastamo','habitamo','intervalamo','nivelamo','notasamo','pomodoramo',
+  'propinamo','relojamo','respiramo','sorteamo','tareasamo','temporizamo',
+  'viajeamo','zonaamo'
+]);
+function publicWebCatalog(catalog){
+  return {...catalog,apps:(catalog.apps||[]).filter(app=>PUBLIC_WEB_APP_IDS.has(app.id)&&app.audience==='public'&&app.status==='candidate'&&(app.artifacts||[]).length>0)};
+}
+
 const state={catalog:FALLBACK,platform:'other',platformAuto:'other',query:'',category:'Todas',verifiedOnly:true,channel:'stable'};
 function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
 function safeHttps(url){try{return new URL(url,location.href).protocol==='https:'}catch{return false}}
@@ -58,7 +69,7 @@ function safeDownload(url,verified){if(!url||!safeHttps(url))return;if(state.ver
 function route(name){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.dataset.view===name));document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.route===name));window.scrollTo({top:0,behavior:'smooth'});if(name==='settings')renderSettings()}
 function openPlatformDialog(){const d=document.getElementById('platformDialog');const opts=['auto','android','windows','macos','linux','ios','web'];const saved=localStorage.getItem('storeamo.platform');document.getElementById('platformOptions').innerHTML=opts.map(p=>`<button class="platform-option ${(p==='auto'&&!saved)||p===saved?'current':''}" type="button" data-platform="${p}">${p==='auto'?`Automático · ${labelPlatform(state.platformAuto)}`:labelPlatform(p)}</button>`).join('');d.showModal();d.querySelectorAll('[data-platform]').forEach(b=>b.onclick=()=>{if(b.dataset.platform==='auto')localStorage.removeItem('storeamo.platform');else localStorage.setItem('storeamo.platform',b.dataset.platform);state.platform=effectivePlatform();d.close();render()})}
 function applyTheme(mode){document.body.classList.remove('light');if(mode==='light'||(mode==='system'&&matchMedia('(prefers-color-scheme: light)').matches))document.body.classList.add('light');localStorage.setItem('storeamo.theme',mode)}
-async function load(){state.platformAuto=detectPlatform();state.platform=effectivePlatform();state.verifiedOnly=localStorage.getItem('storeamo.verifiedOnly')!=='false';state.channel=localStorage.getItem('storeamo.channel')||'stable';applyTheme(localStorage.getItem('storeamo.theme')||'dark');try{const r=await fetch(CATALOG_URL,{cache:'no-store'});if(!r.ok)throw new Error('catalog');const c=await r.json();if(c.schema!=='storeamo.catalog.v1'||!Array.isArray(c.apps))throw new Error('schema');state.catalog=c}catch(e){state.catalog=FALLBACK}render()}
+async function load(){state.platformAuto=detectPlatform();state.platform=effectivePlatform();state.verifiedOnly=localStorage.getItem('storeamo.verifiedOnly')!=='false';state.channel=localStorage.getItem('storeamo.channel')||'stable';applyTheme(localStorage.getItem('storeamo.theme')||'dark');try{const r=await fetch(CATALOG_URL,{cache:'no-store'});if(!r.ok)throw new Error('catalog');const c=await r.json();if(c.schema!=='storeamo.catalog.v1'||!Array.isArray(c.apps))throw new Error('schema');state.catalog=publicWebCatalog(c)}catch(e){state.catalog=FALLBACK}render()}
 
 document.addEventListener('click',e=>{const r=e.target.closest('[data-route]');if(r)route(r.dataset.route)});document.getElementById('searchToggle').onclick=()=>{route('home');document.getElementById('searchInput').focus()};document.getElementById('searchInput').oninput=e=>{state.query=e.target.value.trim();render()};document.getElementById('platformButton').onclick=openPlatformDialog;document.getElementById('verifiedOnly').onchange=e=>{state.verifiedOnly=e.target.checked;localStorage.setItem('storeamo.verifiedOnly',String(state.verifiedOnly));render()};document.getElementById('channelSelect').onchange=e=>{state.channel=e.target.value;localStorage.setItem('storeamo.channel',state.channel)};document.getElementById('themeSelect').onchange=e=>applyTheme(e.target.value);
 load();
